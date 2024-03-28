@@ -52,7 +52,8 @@ struct ContentView: View {
                     }
                     .pickerStyle(.segmented)
                 }
-                Section {
+                //MARK: Challenge 1. Add a header to the third section, saying “Amount per person” 
+                Section("“Amount per person”") {
                     Text(totalPerPerson, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                 }
             }
