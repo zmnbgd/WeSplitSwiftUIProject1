@@ -28,6 +28,20 @@ struct ContentView: View {
         return amountPerPerson
     }
     
+    var totalTipAmount: Double {
+        
+        let tipSelection = Double(tipPercentage)
+        let tipValue = checkAmount / 100 * tipSelection
+        return 0
+    }
+    
+    var totalAmountWithTip: Double {
+        
+        
+        
+        return 0
+    }
+    
     var body: some View {
         NavigationStack {
             Form {
@@ -52,9 +66,18 @@ struct ContentView: View {
                     }
                     .pickerStyle(.segmented)
                 }
-                //MARK: Challenge 1. Add a header to the third section, saying “Amount per person” 
+                
+                Section("tip value, without dividing by the number of people") {
+                    
+                }
+                
+                //MARK: Challenge 1. Add a header to the third section, saying “Amount per person”
                 Section("“Amount per person”") {
                     Text(totalPerPerson, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                }
+                //MARK: Challenge 2. Add another section showing the total amount for the check – i.e., the original amount plus tip value, without dividing by the number of people.
+                Section("Total amount including tip") {
+                    
                 }
             }
             .navigationTitle("We split")
