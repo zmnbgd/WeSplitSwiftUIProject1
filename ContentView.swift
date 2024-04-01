@@ -28,19 +28,18 @@ struct ContentView: View {
         return amountPerPerson
     }
     
-    var totalTipAmount: Double {
-        
-        let tipSelection = Double(tipPercentage)
-        let tipValue = checkAmount / 100 * tipSelection
-        return 0
-    }
+    var totalCheckAmount: Double {
+         let peopleCount = Double(numberOfPeople + 2)
+         let tipSelection = Double(tipPercentage)
+         
+         let tipValue = checkAmount / 100 * tipSelection
+         let totalAmountForCheck = checkAmount + tipValue
+         
+         return totalAmountForCheck
+         
+     }
     
-    var totalAmountWithTip: Double {
-        
-        
-        
-        return 0
-    }
+
     
     var body: some View {
         NavigationStack {
@@ -77,9 +76,10 @@ struct ContentView: View {
                 }
                 //MARK: Challenge 2. Add another section showing the total amount for the check – i.e., the original amount plus tip value, without dividing by the number of people.
                 Section("Total amount including tip") {
-                    
+                    Text(totalCheckAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                 }
             }
+            
             .navigationTitle("We split")
             .toolbar {
                 if amountIsFocused {
