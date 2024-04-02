@@ -15,6 +15,8 @@ struct ContentView: View {
     
     @FocusState private var amountIsFocused: Bool
     
+    @State private var showingTipPercentageSelection = false
+    
     let tipPercentages = [10, 15, 20, 25, 0]
     
     var totalPerPerson: Double {
@@ -29,18 +31,13 @@ struct ContentView: View {
     }
     
     var totalCheckAmount: Double {
-         let peopleCount = Double(numberOfPeople + 2)
          let tipSelection = Double(tipPercentage)
-         
          let tipValue = checkAmount / 100 * tipSelection
          let totalAmountForCheck = checkAmount + tipValue
          
          return totalAmountForCheck
-         
      }
-    
 
-    
     var body: some View {
         NavigationStack {
             Form {
@@ -58,18 +55,17 @@ struct ContentView: View {
                 }
                 
                 Section("How much you want to tip?") {
-                    Picker("Tip percentage", selection: $tipPercentage) {
-                        ForEach(tipPercentages, id: \.self) {
-                            Text($0, format: .percent)
-                        }
+//                    Picker("Tip percentage", selection: $tipPercentage) {
+//                        ForEach(0..<101) {
+//                            Text($0, format: .percent)
+//                        }
+//                    }
+//                    .pickerStyle(.automatic)
+                    //MARK: Challenge 3. Change the tip percentage picker to show a new screen rather than using a segmented control, and give it a wider range of options – everything from 0% to 100%. Tip: use the range 0..<101 for your range rather than a fixed array.
+                    NavigationLink(destination: TipPercentageSelectionView(tipPercentage: $tipPercentage)) {
+                    Text("Select Tip Percentage")
                     }
-                    .pickerStyle(.segmented)
                 }
-                
-                Section("tip value, without dividing by the number of people") {
-                    
-                }
-                
                 //MARK: Challenge 1. Add a header to the third section, saying “Amount per person”
                 Section("“Amount per person”") {
                     Text(totalPerPerson, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
